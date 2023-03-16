@@ -1,0 +1,50 @@
+openapi: 3.0.3
+info:
+  title: gMaps API
+  description: gMaps
+  version: 1.0.11
+servers:
+  - url: http://localhost/api
+tags:
+  - name: gmaps
+    description: gMaps APIs
+paths:
+  /address:
+    post:
+      tags:
+        - gmaps
+      summary: Obtain a well-formatted address from gMaps Address Validation API
+      description: obtain an address
+      operationId: getFormattedAddress
+      requestBody:
+        description: address object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormattedAddress'
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        number:
+          type: integer
+        city:
+          type: string
+        country:
+          type: string
+    FormattedAddress:
+      type: object
+      properties:
+        address:
+          type: string
